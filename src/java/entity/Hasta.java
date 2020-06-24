@@ -1,8 +1,7 @@
-
 package entity;
 
-
 public class Hasta {
+
     private int id;
     private String adi;
     private String soyadi;
@@ -59,8 +58,34 @@ public class Hasta {
     public void setTckimlikno(String tckimlikno) {
         this.tckimlikno = tckimlikno;
     }
-    
-    
-    
-    
+
+    public String getAdiSoyadi() {
+        return this.adi + " " + this.soyadi;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Hasta other = (Hasta) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+
 }

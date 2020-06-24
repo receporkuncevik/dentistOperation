@@ -7,7 +7,7 @@
                 template="/template/admin.xhtml">
 
     <ui:define name="content">
-        <h:form>
+        <h:form id="hasta-form">
             <div class="row">
                 <div class="col-12 col-sm-12 col-lg-12">
                     <div class="card">
@@ -42,9 +42,19 @@
                                     <h:column>
                                         <f:facet name="header">İşlemler</f:facet>
                                         <h:commandButton styleClass="btn btn-action bg-purple mr-1" h:data-toggle="tooltip" action="#{hastaBean.updateForm(h)}" value="Güncelle"/>
-                                        <h:commandButton styleClass="btn btn-danger btn-action" h:data-toggle="tooltip" action="#{hastaBean.delete(h)}" value="Sil"/>
+                                        <h:commandButton styleClass="btn btn-danger btn-action" h:data-toggle="tooltip" action="#{hastaBean.delete(h)}" value="Sil" >
+                                            <f:ajax execute="@this" render="hasta-form" />
+                                        </h:commandButton>
                                     </h:column>
                                 </h:dataTable>
+                                
+                                <div class="btn-group">
+                                    <h:commandButton action="#{hastaBean.previousPage}" styleClass="btn btn-outline-warning" value="Önceki Sayfa"/>
+                                    <h:commandButton action="#{hastaBean.nextPage}" styleClass="btn btn-outline-success" value="Sonraki Sayfa"/>
+                                    <div class="card-header">
+                                        <h:outputLabel>#{hastaBean.page} of #{hastaBean.pageCount}</h:outputLabel>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

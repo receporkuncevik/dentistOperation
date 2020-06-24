@@ -1,20 +1,19 @@
 package controller;
 
-import entity.Hasta;
+import entity.Randevu;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import model.HastaModel;
+import model.RandevuModel;
 
 
 @Named
 @SessionScoped
-public class HastaBean implements Serializable {
+public class RandevuBean implements Serializable {
 
-    private HastaModel hastaModel;
-    private Hasta entity;
-
+    private RandevuModel randevuModel;
+    private Randevu entity;
     
     private int pageCount;
     private int page = 1;
@@ -35,56 +34,57 @@ public class HastaBean implements Serializable {
         else 
             this.page--;
     }
-    
+
     //CRUD
     public String create() {
-        this.getHastaModel().create(entity);
+        this.getRandevuModel().create(entity);
         return "index";
     }
 
-    public List<Hasta> getRead() {
+    public List<Randevu> getRead() {
         int start = (page-1)* this.pageSize;
-        return this.getHastaModel().read(start,this.pageSize);
+        return this.getRandevuModel().read(start,this.pageSize);
     }
 
-    public String updateForm(Hasta h) {
-        this.entity = h;
+    public String updateForm(Randevu t) {
+        this.entity = t;
         return "update";
     }
 
     public String update() {
-        this.getHastaModel().update(entity);
+        this.getRandevuModel().update(entity);
         return "index";
     }
 
-    public void delete(Hasta h) {
-        this.getHastaModel().delete(h);
+    public void delete(Randevu t) {
+        this.getRandevuModel().delete(t);
     }
 
-    public HastaBean() {
+    public RandevuBean() {
     }
 
-    public HastaModel getHastaModel() {
-        if (this.hastaModel == null) {
-            this.hastaModel = new HastaModel();
+    public RandevuModel getRandevuModel() {
+        if (this.randevuModel == null) {
+            this.randevuModel = new RandevuModel();
         }
-        return hastaModel;
+        return randevuModel;
     }
 
-    public void setHastaModel(HastaModel hastaModel) {
-        this.hastaModel = hastaModel;
+    public void setRandevuModel(RandevuModel randevuModel) {
+        this.randevuModel = randevuModel;
     }
 
-    public Hasta getEntity() {
+    public Randevu getEntity() {
         if (this.entity == null) {
-            this.entity = new Hasta();
+            this.entity = new Randevu();
         }
         return entity;
     }
 
-    public void setEntity(Hasta entity) {
+    public void setEntity(Randevu entity) {
         this.entity = entity;
     }
+
     
     public int getPage() {
         return page;
@@ -103,12 +103,11 @@ public class HastaBean implements Serializable {
     }
     
      public int getPageCount() {
-        this.pageCount = (int) Math.ceil( this.getHastaModel().count() / (double) this.pageSize);
+        this.pageCount = (int) Math.ceil( this.getRandevuModel().count() / (double) this.pageSize);
         return this.pageCount;
     }
     
      public void setPageCount(int pageCount) {
         this.pageCount = pageCount;
     }
-
 }

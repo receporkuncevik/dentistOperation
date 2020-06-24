@@ -7,10 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import util.DBConnection;
 
-/**
- *
- * @author RecepOrkun
- */
 public class HastaModel extends DBConnection {
 
     //CRUD İşlemleri
@@ -25,18 +21,19 @@ public class HastaModel extends DBConnection {
     }
 
     //READ
-    public List<Hasta> read() {
+    public List<Hasta> read(int start,int pageSize) {
         List<Hasta> list = new ArrayList<>();
         try {
             Statement st = this.connect().createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM hasta ORDER BY id ASC");
+            ResultSet rs = st.executeQuery("SELECT * FROM hasta ORDER BY id ASC LIMIT " + start + ", " + pageSize);
 
             while (rs.next()) {
                 Hasta hasta = new Hasta(rs.getInt("id"), rs.getString("adi"), rs.getString("soyadi"),
                         rs.getString("telefon"), rs.getString("tckimlikno"));
                 list.add(hasta);
             }
-
+            st.close();
+            rs.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -61,6 +58,53 @@ public class HastaModel extends DBConnection {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+    
+     public Hasta getById(int id){
+        Hasta h = null;
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("Select * From hasta where id = "+id);
+            rs.next();
+            
+            h = new Hasta(rs.getInt("id"), rs.getString("adi"), rs.getString("soyadi"), rs.getString("telefon"), rs.getString("tckimlikno"));
+            
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return h;
+    }
+
+    public List<Hasta> getDoktorHastalari(int id) {
+        List<Hasta> doktorHastalari = new ArrayList<>();
+        
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("Select * From doktor_hasta where doktor_id = "+id);
+            
+            while(rs.next()){
+                doktorHastalari.add(this.getById(rs.getInt("hasta_id")));
+            }
+            
+        } catch (Exception e) {
+        }
+        
+        return doktorHastalari;
+    }
+
+    public int count() {
+        int count = 0;
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("SELECT count(*) as toplam FROM hasta");
+            rs.next();
+            count = rs.getInt("toplam");
+            
+        } catch (Exception e) {
+           
+        }
+        return count;
     }
 
 }
