@@ -8,6 +8,7 @@ MariaDb 10.4
 Java EE 8
 Oracle Java JDK 8
 
+-----------------------------------------------
 
 Ajax istekleri sil butonlarına eklendi.
 
