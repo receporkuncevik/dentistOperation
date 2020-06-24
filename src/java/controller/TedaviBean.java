@@ -7,16 +7,33 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import model.TedaviModel;
 
-/**
- *
- * @author RecepOrkun
- */
+
 @Named
 @SessionScoped
 public class TedaviBean implements Serializable {
 
     private TedaviModel tedaviModel;
     private Tedavi entity;
+    
+     private int pageCount;
+    private int page = 1;
+    private int pageSize = 10;
+
+    
+    public void nextPage() {
+        if (this.getPageCount() == this.page)
+            this.page = 1;
+        else 
+            
+            this.page++;
+    }
+    
+    public void previousPage() {
+        if (this.page == 1)
+            this.page = this.getPageCount();
+        else 
+            this.page--;
+    }
 
     //CRUD
     public String create() {
@@ -25,7 +42,8 @@ public class TedaviBean implements Serializable {
     }
 
     public List<Tedavi> getRead() {
-        return this.getTedaviModel().read();
+        int start = (page-1)* this.pageSize;
+        return this.getTedaviModel().read(start,this.pageSize);
     }
 
     public String updateForm(Tedavi t) {
@@ -66,5 +84,31 @@ public class TedaviBean implements Serializable {
     public void setEntity(Tedavi entity) {
         this.entity = entity;
     }
+    
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+    
+     public int getPageCount() {
+        this.pageCount = (int) Math.ceil( this.getTedaviModel().count() / (double) this.pageSize);
+        return this.pageCount;
+    }
+    
+     public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+
 
 }

@@ -22,11 +22,18 @@ and open the template in the editor.
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Adı</label> 
-                                <h:inputText styleClass="form-control" value="#{tedaviBean.entity.aciklama}" required="true"/>
+                                <h:inputText id="adi" styleClass="form-control" value="#{tedaviBean.entity.aciklama}" validator="customValidator" label="Adı" />
                             </div>
                         </div>
                         <div class="card-footer text-right">
                             <h:commandButton styleClass="btn btn-primary" action="#{tedaviBean.create()}" value="Ekle" />
+                        </div>
+                        
+                        <div class="card-body">
+                            <div class="form-group">
+                                <h:messages for="adi" styleClass="alert alert-danger" />  
+                            </div>
+                            
                         </div>
                     </h:form>
                 </div>

@@ -25,16 +25,19 @@ public class EnvanterModel extends DBConnection {
     }
 
     //READ
-    public List<Envanter> read() {
+    public List<Envanter> read(int start,int pageSize) {
         List<Envanter> list = new ArrayList<>();
         try {
             Statement st = this.connect().createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM envanter ORDER BY id ASC");
+            ResultSet rs = st.executeQuery("SELECT * FROM envanter ORDER BY id ASC LIMIT " + start + ", " + pageSize);
 
             while (rs.next()) {
                 Envanter envanter = new Envanter(rs.getInt("id"), rs.getString("aciklama"), rs.getInt("adet"));
                 list.add(envanter);
             }
+            
+            st.close();
+            rs.close();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -60,6 +63,37 @@ public class EnvanterModel extends DBConnection {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+    
+    public Envanter getById(int id){
+        
+        Envanter env = null;
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from envanter where id = "+id);
+            rs.next();
+            
+            env = new Envanter(rs.getInt("id"), rs.getString("aciklama"),rs.getInt("adet"));
+            
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return env;
+    }
+
+    public int count() {
+         int count = 0;
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("SELECT count(*) as toplam FROM envanter");
+            rs.next();
+            count = rs.getInt("toplam");
+            
+        } catch (Exception e) {
+           
+        }
+        return count;
     }
 
 }

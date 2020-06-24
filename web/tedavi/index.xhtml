@@ -7,7 +7,7 @@
                 template="/template/admin.xhtml">
 
     <ui:define name="content">
-        <h:form>
+        <h:form id="tedavi-form">
             <div class="row">
                 <div class="col-12 col-sm-12 col-lg-12">
                     <div class="card">
@@ -30,9 +30,19 @@
                                     <h:column>
                                         <f:facet name="header">İşlemler</f:facet>
                                         <h:commandButton styleClass="btn btn-action bg-purple mr-1" h:data-toggle="tooltip" action="#{tedaviBean.updateForm(t)}" value="Güncelle"/>
-                                        <h:commandButton styleClass="btn btn-danger btn-action" h:data-toggle="tooltip" action="#{tedaviBean.delete(t)}" value="Sil"/>
+                                        <h:commandButton onclick="$('#exampleModalCenter').modal('show')" styleClass="btn btn-danger" h:data-toggle="tooltip" action="#{tedaviBean.delete(t)}" value="Sil" >
+                                            <f:ajax execute="@this" render="tedavi-form" />
+                                        </h:commandButton>
                                     </h:column>
                                 </h:dataTable>
+
+                                <div class="btn-group">
+                                    <h:commandButton action="#{tedaviBean.previousPage}" styleClass="btn btn-outline-warning" value="Önceki Sayfa"/>
+                                    <h:commandButton action="#{tedaviBean.nextPage}" styleClass="btn btn-outline-success" value="Sonraki Sayfa"/>
+                                    <div class="card-header">
+                                        <h:outputLabel>#{tedaviBean.page} of #{tedaviBean.pageCount}</h:outputLabel>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

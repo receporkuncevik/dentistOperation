@@ -25,16 +25,18 @@ public class TedaviModel extends DBConnection {
     }
 
     //READ
-    public List<Tedavi> read() {
+    public List<Tedavi> read(int start,int pageSize) {
         List<Tedavi> list = new ArrayList<>();
         try {
             Statement st = this.connect().createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM tedavi ORDER BY id ASC");
+            ResultSet rs = st.executeQuery("SELECT * FROM tedavi ORDER BY id ASC LIMIT " + start + ", " + pageSize);
 
             while (rs.next()) {
                 Tedavi tedavi = new Tedavi(rs.getInt("id"), rs.getString("aciklama"));
                 list.add(tedavi);
             }
+            
+           
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -60,6 +62,36 @@ public class TedaviModel extends DBConnection {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+    
+    public Tedavi getById(int id){
+        Tedavi t = null;
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("select * from tedavi where id = "+id);
+            rs.next();
+            
+            t = new Tedavi(rs.getInt("id"), rs.getString("aciklama"));
+            
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return t;
+    }
+
+    public int count() {
+        int count = 0;
+        try {
+            Statement st = this.connect().createStatement();
+            ResultSet rs = st.executeQuery("SELECT count(*) as toplam FROM tedavi");
+            rs.next();
+            count = rs.getInt("toplam");
+            
+        } catch (Exception e) {
+           
+        }
+        return count;
     }
 
 }

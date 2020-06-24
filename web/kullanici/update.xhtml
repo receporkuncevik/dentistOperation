@@ -12,35 +12,25 @@ and open the template in the editor.
                 template="/template/admin.xhtml">
 
     <ui:define name="content">
-        <div class="row">
+       <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
                 <div class="card">
                     <h:form>
                         <div class="card-header">
-                            <h4>Envanter Ekle</h4>
+                            <h4>Kullanıcı Güncelle</h4>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label>Açıklama</label> 
-                                <h:inputText id="aciklama" styleClass="form-control" value="#{envanterBean.entity.aciklama}" validator="customValidator" label="Açıklama" />
+                                <label>Kullanıcı Adı</label> 
+                                <h:inputText styleClass="form-control" value="#{kullaniciBean.entity.kullaniciAdi}" required="true"/>
                             </div>
                             <div class="form-group">
-                                <label>Adet</label> 
-                                <h:inputText id="adet" styleClass="form-control" value="#{envanterBean.entity.adet}" validator="customValidator" label="Adet" />
+                                <label>Şifre</label> 
+                                <h:inputText styleClass="form-control" value="#{kullaniciBean.entity.sifre}" h:type="hidden" size="15" required="true"></h:inputText>
                             </div>
                         </div>
                         <div class="card-footer text-right">
-                            <h:commandButton styleClass="btn btn-primary" value="Ekle" action="#{envanterBean.create()}" />
-                        </div>
-                        
-                        
-                        <div class="card-body">
-                            <div class="form-group">
-                                <h:messages for="aciklama" styleClass="alert alert-danger" />  
-                            </div>
-                            <div class="form-group">
-                                <h:messages for="adet" styleClass="alert alert-danger" />  
-                            </div>
+                            <h:commandButton styleClass="btn btn-primary" action="#{kullaniciBean.update()}" value="Güncelle" />
                         </div>
                     </h:form>
                 </div>

@@ -22,15 +22,24 @@ and open the template in the editor.
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Açıklama</label> 
-                                <h:inputText styleClass="form-control" value="#{envanterBean.entity.aciklama}" required="true"/>
+                                <h:inputText id="aciklama" styleClass="form-control" value="#{envanterBean.entity.aciklama}" validator="customValidator" label="Açıklama" />
                             </div>
                             <div class="form-group">
                                 <label>Adet</label> 
-                                <h:inputText styleClass="form-control" value="#{envanterBean.entity.adet}" required="true"/>
+                                <h:inputText id="adet" styleClass="form-control" value="#{envanterBean.entity.adet}" validator="customValidator" label="Adet" />
                             </div>
                         </div>
                         <div class="card-footer text-right">
                             <h:commandButton styleClass="btn btn-primary" action="#{envanterBean.update()}" value="Güncelle" />
+                        </div>
+                        
+                        <div class="card-body">
+                            <div class="form-group">
+                                <h:messages for="aciklama" styleClass="alert alert-danger" />  
+                            </div>
+                            <div class="form-group">
+                                <h:messages for="adet" styleClass="alert alert-danger" />  
+                            </div>
                         </div>
                     </h:form>
                 </div>

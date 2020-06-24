@@ -1,19 +1,18 @@
 package controller;
 
-import entity.Envanter;
+import entity.Kullanici;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import model.EnvanterModel;
-
+import model.KullaniciModel;
 
 @Named
 @SessionScoped
-public class EnvanterBean implements Serializable {
+public class KullaniciBean implements Serializable {
 
-    private EnvanterModel envanterModel;
-    private Envanter entity;
+    private KullaniciModel kullaniciModel;
+    private Kullanici entity;
     
     private int pageCount;
     private int page = 1;
@@ -37,51 +36,51 @@ public class EnvanterBean implements Serializable {
 
     //CRUD
     public String create() {
-        this.getEnvanterModel().create(entity);
+        this.getKullaniciModel().create(entity);
         return "index";
     }
 
-    public List<Envanter> getRead() {
+    public List<Kullanici> getRead() {
         int start = (page-1)* this.pageSize;
-        return this.getEnvanterModel().read(start,this.pageSize);
+        return this.getKullaniciModel().read(start,this.pageSize);
     }
 
-    public String updateForm(Envanter e) {
-        this.entity = e;
+    public String updateForm(Kullanici t) {
+        this.entity = t;
         return "update";
     }
 
     public String update() {
-        this.getEnvanterModel().update(entity);
+        this.getKullaniciModel().update(entity);
         return "index";
     }
 
-    public void delete(Envanter e) {
-        this.getEnvanterModel().delete(e);
+    public void delete(Kullanici t) {
+        this.getKullaniciModel().delete(t);
     }
 
-    public EnvanterBean() {
+    public KullaniciBean() {
     }
 
-    public EnvanterModel getEnvanterModel() {
-        if (this.envanterModel == null) {
-            this.envanterModel = new EnvanterModel();
+    public KullaniciModel getKullaniciModel() {
+        if (this.kullaniciModel == null) {
+            this.kullaniciModel = new KullaniciModel();
         }
-        return envanterModel;
+        return kullaniciModel;
     }
 
-    public void setEnvanterModel(EnvanterModel envanterModel) {
-        this.envanterModel = envanterModel;
+    public void setKullaniciModel(KullaniciModel kullaniciModel) {
+        this.kullaniciModel = kullaniciModel;
     }
 
-    public Envanter getEntity() {
+    public Kullanici getEntity() {
         if (this.entity == null) {
-            this.entity = new Envanter();
+            this.entity = new Kullanici();
         }
         return entity;
     }
 
-    public void setEntity(Envanter entity) {
+    public void setEntity(Kullanici entity) {
         this.entity = entity;
     }
     
@@ -102,7 +101,7 @@ public class EnvanterBean implements Serializable {
     }
     
      public int getPageCount() {
-        this.pageCount = (int) Math.ceil( this.getEnvanterModel().count() / (double) this.pageSize);
+        this.pageCount = (int) Math.ceil( this.getKullaniciModel().count() / (double) this.pageSize);
         return this.pageCount;
     }
     

@@ -7,44 +7,40 @@
                 template="/template/admin.xhtml">
 
     <ui:define name="content">
-        <h:form id="envanter-form">
+        <h:form id="kullanici-form">
             <div class="row">
                 <div class="col-12 col-sm-12 col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Envanter Listesi</h4> 
-                            <h:commandButton styleClass="btn btn-icon btn-lg btn-success"  action="create"  value="Yeni Envanter Ekle"/>
+                            <h4>Kullanıcı Listesi</h4> 
+                            <h:commandButton styleClass="btn btn-icon btn-lg btn-success"  action="create"  value="Yeni Kullanıcı Ekle"/>
                         </div>
 
                         <div class="card-body">
                             <div class="table-responsive table-invoice">
-                                <h:dataTable styleClass="table table-striped" value="#{envanterBean.read}" var="e">
+                                <h:dataTable styleClass="table table-striped" value="#{kullaniciBean.read}" var="k">
                                     <h:column>
                                         <f:facet name="header">ID:</f:facet>
-                                            #{e.id}
+                                            #{k.id}
                                     </h:column>
                                     <h:column>
-                                        <f:facet name="header">Açıklama</f:facet>
-                                            #{e.aciklama}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">Adet</f:facet>
-                                            #{e.adet}
+                                        <f:facet name="header">Kullanıcı Adı</f:facet>
+                                            #{k.kullaniciAdi}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">İşlemler</f:facet>
-                                        <h:commandButton styleClass="btn btn-action bg-purple mr-1" h:data-toggle="tooltip" action="#{envanterBean.updateForm(e)}" value="Güncelle"/>
-                                        <h:commandButton styleClass="btn btn-danger btn-action" h:data-toggle="tooltip" action="#{envanterBean.delete(e)}" value="Sil" > 
-                                            <f:ajax execute="@this" render="envanter-form" />
+                                        <h:commandButton styleClass="btn btn-action bg-purple mr-1" h:data-toggle="tooltip" action="#{kullaniciBean.updateForm(k)}" value="Güncelle"/>
+                                        <h:commandButton styleClass="btn btn-danger btn-action" h:data-toggle="tooltip" action="#{kullaniciBean.delete(k)}" value="Sil" >
+                                            <f:ajax execute="@this" render="kullanici-form" />
                                         </h:commandButton>
                                     </h:column>
                                 </h:dataTable>
                                 
                                 <div class="btn-group">
-                                    <h:commandButton action="#{envanterBean.previousPage}" styleClass="btn btn-outline-warning" value="Previous"/>
-                                    <h:commandButton action="#{envanterBean.nextPage}" styleClass="btn btn-outline-success" value="Next"/>
+                                    <h:commandButton action="#{kullaniciBean.previousPage}" styleClass="btn btn-outline-warning" value="Önceki Sayfa"/>
+                                    <h:commandButton action="#{kullaniciBean.nextPage}" styleClass="btn btn-outline-success" value="Sonraki Sayfa"/>
                                     <div class="card-header">
-                                        <h:outputLabel>#{envanterBean.page} of #{envanterBean.pageCount}</h:outputLabel>
+                                        <h:outputLabel>#{kullaniciBean.page} of #{kullaniciBean.pageCount}</h:outputLabel>
                                     </div>
                                 </div>
                             </div>
