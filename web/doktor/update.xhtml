@@ -12,14 +12,6 @@ and open the template in the editor.
                 template="/template/admin.xhtml">
 
     <ui:define name="content">
-
-
-
-
-
-
-
-
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
                 <div class="card">
@@ -30,23 +22,39 @@ and open the template in the editor.
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Adi</label> 
-                                <h:inputText styleClass="form-control" value="#{doktorBean.entity.adi}" required="true"/>
+                                <h:inputText id="adi" styleClass="form-control" value="#{doktorBean.entity.adi}" validator="customValidator" label="Adı" />
                             </div>
                             <div class="form-group">
                                 <label>Soyadi</label> 
-                                <h:inputText styleClass="form-control" value="#{doktorBean.entity.soyadi}" required="true"/>
+                                <h:inputText id="soyadi" styleClass="form-control" value="#{doktorBean.entity.soyadi}" validator="customValidator" label="Soyadı" />
                             </div>
                             <div class="form-group">
                                 <label>İhtisas</label> 
-                                <h:inputText styleClass="form-control" value="#{doktorBean.entity.ihtisas}" required="true"/>
+                                 <h:inputText id="ihtisas" styleClass="form-control" value="#{doktorBean.entity.ihtisas}" validator="customValidator" label="İhtisas" />
                             </div>
                              <div class="form-group">
                                  <label>Telefon</label>
-                                 <h:inputText styleClass="form-control" value="#{doktorBean.entity.telefon}" required="true"/>
+                                 <h:inputText id="telefon" styleClass="form-control" value="#{doktorBean.entity.telefon}" validator="customValidator" label="Telefon" />
                              </div>
                         </div>
                         <div class="card-footer text-right">
                             <h:commandButton styleClass="btn btn-primary" action="#{doktorBean.update()}" value="Güncelle" />
+                        </div>
+                        
+                        
+                        <div class="card-body">
+                            <div class="form-group">
+                                <h:messages for="adi" styleClass="alert alert-danger" />  
+                            </div>
+                            <div class="form-group">
+                                <h:messages for="soyadi" styleClass="alert alert-danger" />  
+                            </div>
+                            <div class="form-group">
+                                <h:messages for="telefon" styleClass="alert alert-danger" />  
+                            </div>
+                            <div class="form-group">
+                                <h:messages for="ihtisas" styleClass="alert alert-danger" />  
+                            </div>
                         </div>
                     </h:form>
                 </div>

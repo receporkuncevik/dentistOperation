@@ -20,33 +20,12 @@
     <h:body>
         <div class="loader"></div>
 
+        <div class="navbar-bg"></div>
+        <nav class="navbar navbar-expand-lg main-navbar">
+            
+        </nav>
         <div id="app">
             <div class="main-wrapper main-wrapper-1">
-                <div class="navbar-bg"></div>
-                <nav class="navbar navbar-expand-lg main-navbar">
-                    <ul class="navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <h:form>
-                                <h:link a:data-toggle="dropdown" styleClass="nav-link dropdown-toggle nav-link-lg nav-link-user" value="#">
-                                <h:graphicImage styleClass="user-img-radious-style" alt="image" value="/resources/img/user.png"/>
-                                <span class="d-sm-none d-lg-inline-block"></span>
-                                </h:link>
-                            </h:form>
-                            
-                            
-                            <div class="dropdown-menu dropdown-menu-right pullDown">
-                                <div class="dropdown-divider"></div>
-                                <h:form>
-                                    <h:link styleClass="dropdown-item has-icon text-danger" value="#">
-                                    <i class="fas fa-sign-out-alt"></i>
-                                    Çıkış Yap
-                                    </h:link>
-                                </h:form>    
-                            </div>
-
-                        </li>
-                    </ul>
-                </nav>
                 <div class="main-sidebar sidebar-style-2">
                     <aside id="sidebar-wrapper">
                         <div class="sidebar-brand">
@@ -67,13 +46,23 @@
                             </div>
                         </div>
                         <ul class="sidebar-menu">
-                            
-
-                            <h:form>
+                            <h:form> 
                                 <li>
                                     <h:link styleClass="nav-link" outcome="/index.xhtml"> 
                                         <i data-feather="home"></i>
                                         <span>Anasayfa</span>
+                                    </h:link>
+                                </li>
+                                <li>
+                                    <h:link styleClass="nav-link" outcome="/randevu/index.xhtml"> 
+                                        <i data-feather="watch"></i>
+                                        <span>Randevu</span>
+                                    </h:link>
+                                </li>
+                                <li>
+                                    <h:link styleClass="nav-link" outcome="/muayene/index.xhtml"> 
+                                        <i data-feather="shield"></i>
+                                        <span>Muayene</span>
                                     </h:link>
                                 </li>
                                 <li>
@@ -89,6 +78,12 @@
                                     </h:link>
                                 </li>
                                 <li>
+                                    <h:link styleClass="nav-link" outcome="/rontgen/index.xhtml"> 
+                                        <i data-feather="plus"></i>
+                                        <span>Röntgen Ekle</span>
+                                    </h:link>
+                                </li>
+                                <li>
                                     <h:link styleClass="nav-link" outcome="/envanter/index.xhtml"> 
                                         <i data-feather="info"></i>
                                         <span>Envanter</span>
@@ -98,6 +93,19 @@
                                     <h:link styleClass="nav-link" outcome="/tedavi/index.xhtml"> 
                                         <i data-feather="type"></i>
                                         <span>Tedavi</span>
+                                    </h:link>
+                                </li>                    
+                                <li>
+                                    <h:link styleClass="nav-link" outcome="/kullanici/index.xhtml"> 
+                                        <i data-feather="settings"></i>
+                                        <span>Kullanıcılar</span>
+                                    </h:link>
+                                </li>
+                                
+                                 <li>
+                                    <h:link styleClass="nav-link text-danger" outcome="/giris/logout.xhtml"> 
+                                        <i data-feather="x-circle"></i>
+                                        <span>Çıkış Yap</span>
                                     </h:link>
                                 </li>
                             </h:form>

@@ -7,13 +7,14 @@
                 template="/template/admin.xhtml">
 
     <ui:define name="content">
-        <h:form>
+        <h:form id="doktor-form">
             <div class="row">
                 <div class="col-12 col-sm-12 col-lg-12">
                     <div class="card">
                         <div class="card-header">
                             <h4>Doktor Listesi</h4> 
                             <h:commandButton styleClass="btn btn-icon btn-lg btn-success"  action="create"  value="Yeni Doktor Oluştur"/>
+                            <h:commandButton styleClass="btn btn-icon btn-lg btn-info"  action="doktoraHastaEkle"  value="Hasta Ekle"/>
                         </div>
 
                         <div class="card-body">
@@ -42,7 +43,48 @@
                                     <h:column>
                                         <f:facet name="header">İşlemler</f:facet>
                                         <h:commandButton styleClass="btn btn-action bg-purple mr-1" h:data-toggle="tooltip" action="#{doktorBean.updateForm(d)}" value="Güncelle"/>
-                                        <h:commandButton styleClass="btn btn-danger btn-action" h:data-toggle="tooltip" action="#{doktorBean.delete(d)}" value="Sil"/>
+                                        <h:commandButton styleClass="btn btn-danger btn-action" h:data-toggle="tooltip" action="#{doktorBean.delete(d)}" value="Sil" > 
+                                            <f:ajax execute="@this" render="doktor-form" />
+                                        </h:commandButton>
+                                    </h:column>
+                                </h:dataTable>
+                                
+                                 <div class="btn-group">
+                                    <h:commandButton action="#{doktorBean.previousPage}" styleClass="btn btn-outline-warning" value="Önceki Sayfa"/>
+                                    <h:commandButton action="#{doktorBean.nextPage}" styleClass="btn btn-outline-success" value="Sonraki Sayfa"/>
+                                    <div class="card-header">
+                                    <h:outputLabel>#{doktorBean.page} of #{doktorBean.pageCount}</h:outputLabel>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+        <h:form>
+            <div class="row">
+                <div class="col-12 col-sm-6 col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Doktor Hastaları Listesi</h4> 
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive table-invoice">
+                                <h:dataTable styleClass="table table-striped" value="#{doktorBean.read}" var="d">
+                                    <h:column>
+                                        <f:facet name="header">Doktor</f:facet>
+                                            #{d.adiSoyadi}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Hasta</f:facet>
+                                        <ul>
+                                            <ui:repeat value="#{d.doktorHastalari}" var="hasta">
+                                                <li>#{hasta.adiSoyadi}</li>
+                                            </ui:repeat>
+                                        </ul>
                                     </h:column>
                                 </h:dataTable>
                             </div>
