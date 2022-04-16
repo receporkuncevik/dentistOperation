@@ -19,7 +19,7 @@ public abstract class DBConnection {
         String driver = "org.mariadb.jdbc.Driver";
         try {
             Class.forName(driver);
-            this.connection = DriverManager.getConnection("jdbc:mariadb://localhost:8000/dentist_data", "root", "547484");
+            this.connection = DriverManager.getConnection("jdbc:mariadb://localhost:8000/dentist_data", "root", "12345");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
